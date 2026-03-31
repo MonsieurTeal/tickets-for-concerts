@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Filament\Resources\Bands\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+
+use function Laravel\Prompts\text;
+
+class BandTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+            TextColumn::make('name')->searchable()->sortable(),
+            TextColumn::make('genre')->searchable()->sortable(),
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}

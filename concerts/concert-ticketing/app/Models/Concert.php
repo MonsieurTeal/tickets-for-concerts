@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Concerts extends Model
+class Concert extends Model
 {
     public function band()
     {
-        return $this->belongsTo(Bands::class);
+        return $this->belongsTo(Band::class);
     }
 
     public function tickets()
     {
-        return $this->hasMany(Tickets::class);
+        return $this->hasMany(Ticket::class);
     }
 }

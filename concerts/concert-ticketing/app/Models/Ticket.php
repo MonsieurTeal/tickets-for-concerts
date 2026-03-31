@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tickets extends Model
+class Ticket extends Model
 {
     public function user()
     {
@@ -12,6 +12,6 @@ class Tickets extends Model
     }
     public function concert()
     {
-        return $this->belongsTo(Concerts::class);
+        return $this->belongsTo(Concert::class);
     }
 }
