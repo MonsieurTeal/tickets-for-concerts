@@ -68,3 +68,74 @@ This structure mirrors the relational database design and allows easy querying o
 	$user->tickets → returns all tickets owned by a user
 
 By defining relationships inside **Models** rather than **Controllers**, the business logic related to the database remains centralized and reusable.
+
+## 31/03/2026
+Today marked the transition from backend-only setup to a functional admin interface using Filament.<br>
+### What was accomplished:<br>
+#### 1. Filament Installation & Setup
+* Installed Filament into the Laravel project
+* Created and configured the admin panel (/admin)
+* Successfully accessed the Filament dashboard
+#### 2. Admin Authentication
+* Created an admin user manually using Tinker<br>
+	* email: admin@test.com
+	* password: password
+* Implemented login functionality in the Filament panel
+#### 3. First CRUD Implementation (Bands)
+* Generated a Filament Resource for Band
+* Understood the structure:
+	* Resource (main logic)
+	* Forms (input fields)
+	* Tables (data display)
+#### 4. Form Creation (BandForm)
+* Added input fields:
+	* name (Band Name)
+	* genre
+* Applied validation rules:
+	* required
+	* max length
+#### 5. Database Integration
+* Fixed mass assignment issue by adding:
+	* protected $fillable = ['name', 'genre'];
+	* Successfully created records from UI → stored in database
+#### 6. Table Display (BandsTable)
+* Configured table columns:
+	* name
+	* genre
+* Data is now visible in the Filament admin panel
+### Errors Encountered & Fixes
+#### 1. Filament Command Not Found
+* Issue: make:filament-resource not recognized
+* Fix: Installed Filament properly using Composer
+#### 2. /admin Returning 404
+* Issue: Panel not registered
+* Fix: Created panel manually:
+	* php artisan make:filament-panel admin
+#### 3. Missing Cache Table
+* Error: relation "cache" does not exist
+* Fix:
+	* php artisan cache:table
+	* php artisan migrate
+#### 4. Data Not Visible in Table
+* Issue: Table columns not defined
+* Fix: Added TextColumn for each field
+### Key Learnings
+* Filament does not replace Laravel — it builds on top of it
+* Clear separation of responsibilities:
+	* Model → data
+	* Form → input
+	* Table → display
+* Laravel conventions (naming, fillable, etc.) are critical
+* Errors are not blockers — they are guidance
+## 02/04/2026
+### New CRUD: Users
+* Learned how Filament can auto-generate resources based on existing database schema
+* Created and configured a Filament Resource for Users
+* Customized the user form to handle sensitive data properly:
+	* Password field configured to be hashed before saving
+	* Conditional validation depending on create vs edit operations
+### Key Learnings
+* Filament significantly accelerates CRUD development by generating admin panels from models and database schema
+* Laravel conventions (naming, structure, and model configuration) are essential for smooth integration
+* Proper handling of sensitive data (e.g., passwords) requires explicit transformation logic at the form level
+* Understanding how Filament maps forms and tables to database fields is crucial for customization and control
