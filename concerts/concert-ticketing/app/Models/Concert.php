@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Concert extends Model
 {
+    protected $fillable = ['band_id', 'date', 'location'];
+
     public function band()
     {
         return $this->belongsTo(Band::class);
